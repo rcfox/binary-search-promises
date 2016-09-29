@@ -61,9 +61,5 @@ function promiseBinarySearch(haystack, needle, compare, low, high) {
     });
 }
 
-// function test_promiseBinarySearch(haystack, searches) {
-//     let zip = rows=>rows[0].map((_,c)=>rows.map(row=>row[c]));
-//     Promise.all(searches.map(needle => promiseBinarySearch(haystack, needle))).then(results => console.log(zip([searches, results])));
-// }
-// test_promiseBinarySearch(['a','b','c','d','f','g','h'], ['a', 'q', 'z', 'd', '1', 'e']);
-// test_promiseBinarySearch([1,3,5,7,9,11], [1,2,3,4,5,6,7,8,9]);
+module.exports = promiseBinarySearch;
+module.exports.wrapComparator = wrapComparator;
