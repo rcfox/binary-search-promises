@@ -6,26 +6,26 @@ var assert = chai.assert;
 var expect = chai.expect;
 var should = require('chai').should();
 
-var binary_search = require('../index');
+var binarySearch = require('../index');
 
 describe('binary search', function() {
     describe('wrapComparator', function() {
         it('should create a function that returns a Promise that resolves to the result of the wrapped function', function() {
-            var func = binary_search.wrapComparator(function(a, b) {return a - b;});
+            var func = binarySearch.wrapComparator(function(a, b) {return a - b;});
             func(1, 2).should.be.a('Promise');
             func(1, 2).should.eventually.equal(-1);
         });
     });
     describe('numbers', function() {
         it('should not find a value in an empty array', function() {
-            binary_search([], 1).should.eventually.contain(false);
+            binarySearch([], 1).should.eventually.contain(false);
         });
 
         var haystack = [0, 2, 4, 6, 8, 10];
         haystack.forEach(function(needle) {
             var expectedPosition = needle / 2;
             it('should find ' + needle + ' at position ' + expectedPosition, function() {
-                binary_search(haystack, needle).should.eventually.be.deep.equal([true, expectedPosition]);
+                binarySearch(haystack, needle).should.eventually.be.deep.equal([true, expectedPosition]);
             });
         });
 
@@ -40,12 +40,12 @@ describe('binary search', function() {
         not_found[-Infinity] = 0;
 
         // I guess object keys get turned into strings, so I need to make sure they're treated as numbers.
-        var numberComparator = binary_search.wrapComparator(function(a, b) { return a - b; });
+        var numberComparator = binarySearch.wrapComparator(function(a, b) { return a - b; });
 
         Object.keys(not_found).forEach(function(needle) {
             var expectedPosition = not_found[needle];
             it('should not find ' + needle + ' in the haystack, but it would go in position ' + expectedPosition, function() {
-                binary_search(haystack, needle, numberComparator).should.eventually.be.deep.equal([false, expectedPosition]);
+                binarySearch(haystack, needle, numberComparator).should.eventually.be.deep.equal([false, expectedPosition]);
             });
         });
     });
@@ -53,7 +53,7 @@ describe('binary search', function() {
        var haystack = ['a', 'c', 'e', 'g', 'i'];
         haystack.forEach(function(needle, expectedPosition) {
             it('should find ' + needle + ' at position ' + expectedPosition, function() {
-                binary_search(haystack, needle).should.eventually.be.deep.equal([true, expectedPosition]);
+                binarySearch(haystack, needle).should.eventually.be.deep.equal([true, expectedPosition]);
             });
         });
         var not_found = {
@@ -65,7 +65,7 @@ describe('binary search', function() {
         Object.keys(not_found).forEach(function(needle) {
             var expectedPosition = not_found[needle];
             it('should not find ' + needle + ' in the haystack, but it would go in position ' + expectedPosition, function() {
-                binary_search(haystack, needle).should.eventually.be.deep.equal([false, expectedPosition]);
+                binarySearch(haystack, needle).should.eventually.be.deep.equal([false, expectedPosition]);
             });
         });
     });
@@ -89,15 +89,15 @@ describe('binary search', function() {
         Object.keys(comparators).forEach(function(comparatorName) {
             it('should be searchable by the "' + comparatorName + '" property', function() {
                 var cmp = comparators[comparatorName];
-                var cmpPromiseFactory = binary_search.wrapComparator(cmp);
+                var cmpPromiseFactory = binarySearch.wrapComparator(cmp);
 
                 var haystack = objects.slice().sort(cmp);
 
                 objects.forEach(function(needle) {
-                    binary_search(haystack, needle, cmpPromiseFactory).should.eventually.contain(true);
+                    binarySearch(haystack, needle, cmpPromiseFactory).should.eventually.contain(true);
                 });
                 not_found.forEach(function(needle) {
-                    binary_search(haystack, needle, cmpPromiseFactory).should.eventually.contain(false);
+                    binarySearch(haystack, needle, cmpPromiseFactory).should.eventually.contain(false);
                 });
             });
         });
