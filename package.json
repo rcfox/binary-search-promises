@@ -1,0 +1,19 @@
+{
+  "name": "binary-search-promises",
+  "version": "1.0.0",
+  "description": "Asynchronous binary search, using promises.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "search",
+    "promises"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcfox/binary-search-promises.git"
+  },
+  "author": "Ryan Fox",
+  "license": "ISC"
+}
