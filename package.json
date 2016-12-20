@@ -4,7 +4,9 @@
   "description": "Asynchronous binary search, using promises.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "compile": "babel -d lib/ src/",
+    "test": "npm run compile && mocha --reporter spec",
+    "prepublish": "npm run compile"
   },
   "keywords": [
     "search",

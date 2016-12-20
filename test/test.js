@@ -6,7 +6,7 @@ var assert = chai.assert;
 var expect = chai.expect;
 var should = require('chai').should();
 
-var binarySearch = require('../index');
+var binarySearch = require('../lib/index');
 
 describe('binary search', function() {
     describe('wrapComparator', function() {
