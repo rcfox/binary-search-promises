@@ -12,7 +12,7 @@ describe('binary search', function() {
     describe('wrapComparator', function() {
         it('should create a function that returns a Promise that resolves to the result of the wrapped function', function() {
             var func = binarySearch.wrapComparator(function(a, b) {return a - b;});
-            func(1, 2).should.be.a('Promise');
+            func(1, 2).should.respondTo('then'); // The babel runtime uses a local promise type, so just check that it's thenable.
             func(1, 2).should.eventually.equal(-1);
         });
     });
