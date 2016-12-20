@@ -1,6 +1,6 @@
 {
   "name": "binary-search-promises",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asynchronous binary search, using promises.",
   "main": "index.js",
   "scripts": {
